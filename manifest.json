@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "Instagram Feature Blocker",
+    "description": "Block certain features on your Instagram page",
+    "version": "1.0.0",
+    "author": "Trent Kelly",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Instagram Feature Blocker"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["dist/content.js"]
+        }
+    ]
+}
