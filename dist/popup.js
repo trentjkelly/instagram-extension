@@ -16,6 +16,7 @@ const features = [
     { id: "profile", sendAction: sendToggleFeature.bind(null, "profile"), storageAction: storageSend.bind(null, "profile") },
     { id: "threads", sendAction: sendToggleFeature.bind(null, "threads"), storageAction: storageSend.bind(null, "threads") },
     { id: "more", sendAction: sendToggleFeature.bind(null, "more"), storageAction: storageSend.bind(null, "more") },
+    { id: "stories", sendAction: sendToggleFeature.bind(null, "stories"), storageAction: storageSend.bind(null, "stories") },
 ];
 // Setup each checkbox to use the functions when checked
 features.forEach(({ id, sendAction, storageAction }) => {

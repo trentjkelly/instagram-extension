@@ -1,6 +1,6 @@
 // content.ts
 // This file is an injected content script that can control instagram's webpage and its DOM
-
+console.log("atleast here")
 // Storing div's child # from instagram page
 const DivLocations = {
     HOME: "div:nth-child(1)",
@@ -21,41 +21,51 @@ const sideGroups = {
     lowerGroup: "xl5mz7h.xhuyl8g"
 }
 
+const areas = {
+    sideBar: "div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x9f619.xvbhtw8.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.x1q0g3np.xqjyukv.x1qjc9v5.x1oa3qoh.x1qughib > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1.x1dr59a3.xixxii4.x13vifvy.xeq5yr9.x1n327nk > div > div > div > div > div.",
+    stories: "div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x9f619.xvbhtw8.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.x1q0g3np.xqjyukv.x1qjc9v5.x1oa3qoh.x1qughib > div.x1gryazu.xh8yej3.x10o80wk.x14k21rp.x17snn68.x6osk4m.x1porb0y > section > main > div.x78zum5.x1q0g3np.xl56j7k.xh8yej3 > div > div > div.xmnaoh6 > div"
+}
 // Assigns each potential chrome message recieved to a function
 const actionHandlers = {
-    "home" : () => toggleSideBarButtons(DivLocations.HOME, sideGroups.upperGroup),
-    "search" : () => toggleSideBarButtons(DivLocations.SEARCH, sideGroups.upperGroup),
-    "explore" : () => toggleSideBarButtons(DivLocations.EXPLORE, sideGroups.upperGroup),
-    "reels" : () => toggleSideBarButtons(DivLocations.REELS, sideGroups.upperGroup),
-    "messages" : () => toggleSideBarButtons(DivLocations.MESSAGES, sideGroups.upperGroup),
-    "notifications" : () => toggleSideBarButtons(DivLocations.NOTIFICATIONS, sideGroups.upperGroup),
-    "create" : () => toggleSideBarButtons(DivLocations.CREATE, sideGroups.upperGroup),
-    "profile" : () => toggleSideBarButtons(DivLocations.PROFILE, sideGroups.upperGroup),
-    "threads" : () => toggleSideBarButtons(DivLocations.THREADS, sideGroups.lowerGroup),
-    "more" : () => toggleSideBarButtons(DivLocations.MORE, sideGroups.lowerGroup)
+    "home" : () => toggleFeature(areas.sideBar, true, DivLocations.HOME, sideGroups.upperGroup),
+    "search" : () => toggleFeature(areas.sideBar, true, DivLocations.SEARCH, sideGroups.upperGroup),
+    "explore" : () => toggleFeature(areas.sideBar, true, DivLocations.EXPLORE, sideGroups.upperGroup),
+    "reels" : () => toggleFeature(areas.sideBar, true, DivLocations.REELS, sideGroups.upperGroup),
+    "messages" : () => toggleFeature(areas.sideBar, true, DivLocations.MESSAGES, sideGroups.upperGroup),
+    "notifications" : () => toggleFeature(areas.sideBar, true, DivLocations.NOTIFICATIONS, sideGroups.upperGroup),
+    "create" : () => toggleFeature(areas.sideBar, true, DivLocations.CREATE, sideGroups.upperGroup),
+    "profile" : () => toggleFeature(areas.sideBar, true, DivLocations.PROFILE, sideGroups.upperGroup),
+    "threads" : () => toggleFeature(areas.sideBar, true, DivLocations.THREADS, sideGroups.lowerGroup),
+    "more" : () => toggleFeature(areas.sideBar, true, DivLocations.MORE, sideGroups.lowerGroup),
+    "stories" : () => toggleFeature(areas.stories, false)
 }
 
 // (Un)hides the buttons
-function toggleSideBarButtons(divLocation : string, sideMenuGroup : string) {
+function toggleFeature(area: string, isSideBar: boolean, divLocation?: string, sideMenuGroup?: string) {
     let body : Element | null = document.querySelector("body")
+    let feature : HTMLElement | null;
     if(body != null) {
         let divs : HTMLCollection | null = body.children
         if(divs != null) {
             let secondDiv : Element = divs[1]
             if(secondDiv != null){
-                let searchButton : HTMLElement | null = secondDiv.querySelector(`div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x9f619.xvbhtw8.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.x1q0g3np.xqjyukv.x1qjc9v5.x1oa3qoh.x1qughib > div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x1qjc9v5.x1oa3qoh.x1nhvcw1.x1dr59a3.xixxii4.x13vifvy.xeq5yr9.x1n327nk > div > div > div > div > div.${sideMenuGroup} > ${divLocation}`)
-                if (searchButton !== null) {
+                if(isSideBar){
+                    feature = secondDiv.querySelector(`${area}${sideMenuGroup} > ${divLocation}`)
+                } else {
+                    feature = secondDiv.querySelector(`${area}`)
+                }
+                if (feature !== null) {
                     if(divLocation == "span"){
-                        if(searchButton.style.display == 'none'){
-                            searchButton.style.display = 'block'
+                        if(feature.style.display == 'none'){
+                            feature.style.display = 'block'
                         } else {
-                            searchButton.style.display = 'none';
+                            feature.style.display = 'none';
                         }
                     }
-                    if(searchButton.hidden){
-                        searchButton.hidden = false
+                    if(feature.hidden){
+                        feature.hidden = false
                     } else {
-                        searchButton.hidden = true
+                        feature.hidden = true
                     }
                 }
             }
