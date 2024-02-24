@@ -40,16 +40,13 @@ const actionHandlers = {
 };
 // (Un)hides the buttons
 function toggleFeature(area, isSideBar, divLocation, sideMenuGroup) {
-    console.log("1");
     let body = document.querySelector("body");
     let feature;
     if (body != null) {
         let divs = body.children;
         if (divs != null) {
-            console.log("2");
             let secondDiv = divs[1];
             if (secondDiv != null) {
-                console.log("3");
                 if (isSideBar) {
                     feature = secondDiv.querySelector(`${area}${sideMenuGroup} > ${divLocation}`);
                 }
@@ -57,7 +54,6 @@ function toggleFeature(area, isSideBar, divLocation, sideMenuGroup) {
                     feature = secondDiv.querySelector(`${area}`);
                 }
                 if (feature !== null) {
-                    console.log("4");
                     if (divLocation == "span") {
                         if (feature.style.display == 'none') {
                             feature.style.display = 'block';

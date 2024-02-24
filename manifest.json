@@ -1,12 +1,12 @@
 {
     "manifest_version": 3,
-    "name": "Instagram Feature Blocker",
-    "description": "Block certain features on your Instagram page",
+    "name": "InstaFocus: Control Your Feed",
+    "description": "Block addictive features on your Instagram page",
     "version": "1.0.0",
     "author": "Trent Kelly",
     "action": {
         "default_popup": "index.html",
-        "default_title": "Instagram Feature Blocker"
+        "default_title": "InstaFocus: Control Your Feed"
     },
     "content_scripts": [
         {
@@ -17,5 +17,12 @@
     ],
     "permissions": [
         "storage"
-    ]
+    ],
+    "icons": {
+        "48": "icons/48.png",
+        "64": "icons/64.png",
+        "128": "icons/128.png",
+        "256": "icons/256.png",
+        "512": "icons/512.png"
+      }
 }
