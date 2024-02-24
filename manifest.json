@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "InstaFocus: Control Your Feed",
-    "description": "Block addictive features on your Instagram page",
+    "description": "Block addictive features on your Instagram page.",
     "version": "1.0.0",
     "author": "Trent Kelly",
     "action": {
